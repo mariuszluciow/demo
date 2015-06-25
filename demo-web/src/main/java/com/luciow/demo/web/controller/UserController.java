@@ -25,7 +25,7 @@ public class UserController {
         userService.register(form.getLogin());
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/user/{login}/status")
+    @RequestMapping(method = RequestMethod.POST, value = "/user/{login}")
     public void register(@PathVariable String login) {
         userService.activate(login);
     }
