@@ -3,6 +3,9 @@ package com.luciow.demo.web.controller;
 import com.luciow.demo.web.api.UserForm;
 import com.luciow.demo.web.model.User;
 import com.luciow.demo.web.service.UserService;
+import javax.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class UserController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     UserService userService;
@@ -31,7 +36,14 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/user/{login}")
-    public UserForm getUser(@PathVariable String login) {
+    public UserForm getUser(@PathVariable String login, HttpServletRequest httpRequest) {
+        String ipAddress = httpRequest.getHeader("X-FORWARDED-FOR");
+        LOGGER.debug("Ip from header: {}", ipAddress);
+        if (ipAddress == null) {
+            ipAddress = httpRequest.getRemoteAddr();
+        }
+        LOGGER.info("IP-{}", ipAddress);
+
         User user = userService.getUser(login);
         return new UserForm.Builder()
                 .withActive(user.isActive())

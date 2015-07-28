@@ -1,3 +1,5 @@
 /demo-ui/nodejs/node/
 /demo-ui/nodejs/node_modules/
 /demo-ui/target/
+/demo-web/demo.log
+/demo-web/demo.json
