@@ -4,6 +4,7 @@ import com.luciow.demo.web.api.UserForm;
 import com.luciow.demo.web.model.User;
 import com.luciow.demo.web.service.UserService;
 import javax.servlet.http.HttpServletRequest;
+import static net.logstash.logback.marker.Markers.append;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/user/{login}")
     public void register(@PathVariable String login) {
+        LOGGER.info(
+                append("loginLength", login.length())
+                .and(append("login", login)),
+                "Registered {}", login
+        );
         userService.activate(login);
     }
 
