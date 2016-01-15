@@ -17,7 +17,7 @@ jobs:
         value: foo
     deploy:
       - printenv
-      - echo ${FOOKEY}
+      - echo $FOOKEY
       - ./mvnw validate
   - stage: Release
     name: Tests
