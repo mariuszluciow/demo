@@ -13,12 +13,11 @@ jobs:
   - stage: Release
     name: Tests
     deploy:
-      - bash -c "printenv"
+      - bash -c "git clone $REPOSITORY ."
       - ./mvnw test
   - stage: Release
     name: Quality checks
     deploy:
-      - bash -c "echo $REPOSITORY"
       - bash -c "git clone $REPOSITORY ."
       - ./mvnw validate
   - stage: Release
