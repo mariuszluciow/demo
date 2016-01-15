@@ -12,12 +12,8 @@ pipeline:
 jobs:
   - stage: Release
     name: Quality checks
-    environmentVariables: 
-      - key: FOOKEY
-        value: foo
     deploy:
-      - printenv
-      - echo $FOOKEY
+      - bash -c "git clone $REPOSITORY ."
       - ./mvnw validate
   - stage: Release
     name: Tests
