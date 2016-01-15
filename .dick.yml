@@ -13,6 +13,7 @@ jobs:
   - stage: Release
     name: Quality checks
     deploy:
+      - bash -c "echo $REPOSITORY"
       - bash -c "git clone $REPOSITORY ."
       - ./mvnw validate
   - stage: Release
