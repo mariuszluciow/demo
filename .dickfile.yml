@@ -1,0 +1,52 @@
+pipeline:
+  stages:
+  - name: Release
+    autorun: true
+  - name: Deploy to e2e env
+    autorun: true
+  - name: Deploy to UAT
+    autorun: true
+  - name: Deploy to PRD
+    autorun: false
+
+jobs:
+  - stage: Release
+    name: Quality checks
+    deploy:
+      - git clone $REPOSITORY .
+      - ./mvnw validate
+  - stage: Release
+    name: Tests
+    deploy:
+      - git clone $REPOSITORY .
+      - ./mvnw test
+  - stage: Release
+    name: Deploy to nexus
+    deploy:
+      - git clone $REPOSITORY .
+      - ./mvnw install
+  - stage: Deploy to e2e env
+    name: Ssh deploy to foo-bar.e2e.example.com
+    deploy:
+      - echo "Deploying app to e2e server"
+      - echo "."
+      - echo "."
+      - echo "."
+      - echo "Running e2e tests"
+      - echo "Success"
+  - stage: Deploy to UAT
+    name: Ssh deploy to foo-bar.uat.example.com
+    deploy:
+      - echo "Deploying app to uat"
+      - echo "."
+      - echo "."
+      - echo "."
+      - echo "Success"
+  - stage: Deploy to PRD
+    name: Ssh deploy to foo-bar.example.com
+    deploy:
+      - echo "Deploying app to prd"
+      - echo "."
+      - echo "."
+      - echo "."
+      - echo "Success"
