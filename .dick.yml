@@ -16,11 +16,6 @@ jobs:
       - bash -c "git clone $REPOSITORY ."
       - ./mvnw test
   - stage: Release
-    name: Quality checks
-    deploy:
-      - bash -c "git clone $REPOSITORY ."
-      - ./mvnw validate
-  - stage: Release
     name: Deploy to nexus
     deploy:
       - bash -c "git clone $REPOSITORY ."
