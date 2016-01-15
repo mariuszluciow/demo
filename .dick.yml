@@ -12,8 +12,11 @@ pipeline:
 jobs:
   - stage: Release
     name: Quality checks
+    environmentVariables: 
+      - key: FOOKEY
+        value: foo
     deploy:
-      - echo ${REPOSITORY}
+      - echo ${FOOKEY}
       - ./mvnw validate
   - stage: Release
     name: Tests
