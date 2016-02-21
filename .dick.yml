@@ -14,13 +14,13 @@ pipeline:
 jobs:
   - stage: Release
     name: Tests
+    requireRepository: true
     deploy:
-      - bash -c "git clone $REPOSITORY ."
       - ./mvnw test
   - stage: Release
     name: Deploy to nexus
+    requireRepository: true
     deploy:
-      - bash -c "git clone $REPOSITORY ."
       - ./mvnw install
   - stage: Deploy to e2e env
     name: Ssh deploy to foo-bar.e2e.example.com
