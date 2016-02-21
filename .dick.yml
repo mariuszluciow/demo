@@ -13,7 +13,7 @@ pipeline:
 
 jobs:
   - stage: Release
-    name: Tests
+    name: Tests 2
     requireRepository: true
     deploy:
       - ./mvnw test
